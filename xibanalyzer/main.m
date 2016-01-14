@@ -7,11 +7,22 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XIBClassGenerator.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        if(argc <= 1)
+        {
+            return 0;
+        }
+        
+        NSString *fileName = [NSString stringWithUTF8String:argv[1]];
+        XIBClassGenerator *classGenerator = [XIBClassGenerator xibClassGeneratorWithContentsOfFile:fileName];
+        BOOL success = [classGenerator parse];
+        if(success == NO)
+        {
+            return -1;
+        }
     }
     return 0;
 }
