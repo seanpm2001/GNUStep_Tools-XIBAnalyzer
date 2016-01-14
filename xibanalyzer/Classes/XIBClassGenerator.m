@@ -58,6 +58,7 @@
         if(parser != nil)
         {
             [parser setDelegate:self];
+            stack = [NSMutableArray arrayWithCapacity:100];
         }
         else
         {
@@ -72,4 +73,28 @@
     return [parser parse];
 }
 
+
+// Delegate
+- (void)  parser:(NSXMLParser *)parser
+ didStartElement:(NSString *)elementName
+    namespaceURI:(NSString *)namespaceURI
+   qualifiedName:(NSString *)qName
+      attributes:(NSDictionary<NSString *,NSString *> *)attributeDict
+{
+    // Push onto the stack...
+    [stack addObject:elementName];
+    
+    // Do whatever...
+}
+
+- (void)  parser:(NSXMLParser *)parser
+   didEndElement:(NSString *)elementName
+    namespaceURI:(NSString *)namespaceURI
+   qualifiedName:(NSString *)qName
+{
+    // Do whatever...
+    
+    // Pop off the stack...
+    [stack removeLastObject];
+}
 @end

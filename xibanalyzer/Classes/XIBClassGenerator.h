@@ -11,6 +11,7 @@
 @interface XIBClassGenerator : NSObject <NSXMLParserDelegate>
 {
     NSXMLParser *parser;
+    NSMutableArray *stack;
 }
 
 + (instancetype) xibClassGeneratorWithContentsOfFile: (NSString *)fileName;
