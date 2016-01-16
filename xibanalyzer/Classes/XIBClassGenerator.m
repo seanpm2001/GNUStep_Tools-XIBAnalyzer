@@ -59,6 +59,8 @@
         {
             [parser setDelegate:self];
             stack = [NSMutableArray arrayWithCapacity:100];
+            classes = [NSMutableDictionary dictionary];
+            classNameMap = [NSMutableDictionary dictionary];
         }
         else
         {
@@ -85,6 +87,7 @@
     [stack addObject:elementName];
     
     // Do whatever...
+    
 }
 
 - (void)  parser:(NSXMLParser *)parser
