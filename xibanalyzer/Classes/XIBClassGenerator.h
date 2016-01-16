@@ -12,8 +12,8 @@
 {
     NSXMLParser *parser;
     NSMutableArray *stack;
-    NSMutableDictionary *classes;
-    NSMutableDictionary *classNameMap;
+    NSMutableDictionary *classes;  // hold classes and file contents....
+    NSMutableDictionary *classNameMap;  // hold mappings from XIB names to actual classnames
 }
 
 + (instancetype) xibClassGeneratorWithContentsOfFile: (NSString *)fileName;
@@ -21,6 +21,7 @@
 + (instancetype) xibClassGeneratorWithData: (NSData *)data;
 
 - (instancetype) initWithData: (NSData *)data;
+- (NSString *)classNameForElementName: (NSString *)elementName;
 - (BOOL) parse;
 
 @end

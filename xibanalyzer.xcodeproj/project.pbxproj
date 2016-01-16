@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1458FE6C1C48199400C53A2E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 1458FE6B1C48199400C53A2E /* main.m */; };
 		1458FE751C481FCA00C53A2E /* XIBClassGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 1458FE741C481FCA00C53A2E /* XIBClassGenerator.m */; };
+		147848761C4A186200EDBBF4 /* NSString+Extensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 147848751C4A186200EDBBF4 /* NSString+Extensions.m */; };
+		147848791C4AD5DC00EDBBF4 /* XIBClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 147848781C4AD5DC00EDBBF4 /* XIBClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +30,10 @@
 		1458FE6B1C48199400C53A2E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1458FE731C481FCA00C53A2E /* XIBClassGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XIBClassGenerator.h; path = Classes/XIBClassGenerator.h; sourceTree = "<group>"; };
 		1458FE741C481FCA00C53A2E /* XIBClassGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XIBClassGenerator.m; path = Classes/XIBClassGenerator.m; sourceTree = "<group>"; };
+		147848741C4A186200EDBBF4 /* NSString+Extensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Extensions.h"; path = "Extensions/NSString+Extensions.h"; sourceTree = "<group>"; };
+		147848751C4A186200EDBBF4 /* NSString+Extensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Extensions.m"; path = "Extensions/NSString+Extensions.m"; sourceTree = "<group>"; };
+		147848771C4AD5DC00EDBBF4 /* XIBClass.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XIBClass.h; sourceTree = "<group>"; };
+		147848781C4AD5DC00EDBBF4 /* XIBClass.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XIBClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +77,10 @@
 			children = (
 				1458FE731C481FCA00C53A2E /* XIBClassGenerator.h */,
 				1458FE741C481FCA00C53A2E /* XIBClassGenerator.m */,
+				147848741C4A186200EDBBF4 /* NSString+Extensions.h */,
+				147848751C4A186200EDBBF4 /* NSString+Extensions.m */,
+				147848771C4AD5DC00EDBBF4 /* XIBClass.h */,
+				147848781C4AD5DC00EDBBF4 /* XIBClass.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -131,7 +141,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				147848761C4A186200EDBBF4 /* NSString+Extensions.m in Sources */,
 				1458FE751C481FCA00C53A2E /* XIBClassGenerator.m in Sources */,
+				147848791C4AD5DC00EDBBF4 /* XIBClass.m in Sources */,
 				1458FE6C1C48199400C53A2E /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,6 +263,7 @@
 				1458FE711C48199400C53A2E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

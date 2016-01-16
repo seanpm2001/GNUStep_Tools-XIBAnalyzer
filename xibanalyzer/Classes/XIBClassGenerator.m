@@ -7,6 +7,7 @@
 //
 
 #import "XIBClassGenerator.h"
+#import "XIBClass.h"
 
 @implementation XIBClassGenerator 
 
@@ -59,8 +60,8 @@
         {
             [parser setDelegate:self];
             stack = [NSMutableArray arrayWithCapacity:100];
-            classes = [NSMutableDictionary dictionary];
-            classNameMap = [NSMutableDictionary dictionary];
+            classes = [NSMutableDictionary dictionaryWithCapacity:100];
+            classNameMap = [NSMutableDictionary dictionaryWithCapacity:100];
         }
         else
         {
@@ -75,6 +76,11 @@
     return [parser parse];
 }
 
+// Class name generation
+- (NSString *)classNameForElementName: (NSString *)elementName
+{
+    return elementName;
+}
 
 // Delegate
 - (void)  parser:(NSXMLParser *)parser
@@ -83,11 +89,16 @@
    qualifiedName:(NSString *)qName
       attributes:(NSDictionary<NSString *,NSString *> *)attributeDict
 {
-    // Push onto the stack...
-    [stack addObject:elementName];
-    
-    // Do whatever...
-    
+    if([[attributeDict allKeys] count] > 0)
+    {
+        // Push onto the stack...
+        [stack addObject:elementName];
+
+        // Do whatever...
+        NSString *className = [self classNameForElementName:elementName];
+        XIBClass *xibClass = [[XIBClass alloc] init];
+        xibClass.className = className;
+    }
 }
 
 - (void)  parser:(NSXMLParser *)parser
