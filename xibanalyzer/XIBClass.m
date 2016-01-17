@@ -12,7 +12,8 @@
 
 - (NSString *) generate
 {
-    
+    // will generate contents based on attributes....
+    return @"";
 }
 
 @end
