@@ -89,7 +89,8 @@
    qualifiedName:(NSString *)qName
       attributes:(NSDictionary<NSString *,NSString *> *)attributeDict
 {
-    if([[attributeDict allKeys] count] > 0)
+    NSArray *allKeys = [attributeDict allKeys];
+    if([allKeys count] > 0)
     {
         // Push onto the stack...
         [stack addObject:elementName];
@@ -98,6 +99,11 @@
         NSString *className = [self classNameForElementName:elementName];
         XIBClass *xibClass = [[XIBClass alloc] init];
         xibClass.className = className;
+        
+        for(NSString *key in allKeys)
+        {
+            
+        }
     }
 }
 

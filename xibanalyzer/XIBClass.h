@@ -11,8 +11,8 @@
 @interface XIBClass : NSObject
 
 @property (nonatomic, assign) NSString *className;
-@property (nonatomic, assign) NSMutableDictionary *attributes;
-@property (nonatomic, assign) NSMutableDictionary *methods;
+@property (nonatomic, assign) NSMutableArray *attributes;
+@property (nonatomic, assign) NSMutableArray *methods;
 
 - (NSString *) generate;
 
