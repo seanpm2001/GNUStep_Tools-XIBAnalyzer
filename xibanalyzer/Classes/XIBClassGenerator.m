@@ -10,6 +10,7 @@
 #import "XIBClass.h"
 #import "XIBMethod.h"
 #import "XIBProperty.h"
+#import "NSString+Extensions.h"
 
 @implementation XIBClassGenerator 
 
@@ -64,6 +65,7 @@
             stack = [NSMutableArray arrayWithCapacity:100];
             classesToNames = [NSMutableDictionary dictionaryWithCapacity:100];
             classNameMap = [NSMutableDictionary dictionaryWithCapacity:100];
+            inObjects = NO;
         }
         else
         {
@@ -87,7 +89,24 @@
 // Class name generation
 - (NSString *)classNameForElementName: (NSString *)elementName
 {
-    return elementName;
+    NSString *newClassName = nil;
+    if(inObjects == NO &&
+       ([elementName isEqualToString:@"document"] ||
+        [elementName isEqualToString:@"deployment"] ||
+        [elementName isEqualToString:@"plugIn"]))
+    {
+        newClassName = [@"IB" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
+    }
+    else if([elementName isEqualToString:@"action"] ||
+            [elementName isEqualToString:@"outlet"])
+    {
+        newClassName = [@"IB" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
+    }
+    else
+    {
+        newClassName = [@"NS" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
+    }
+    return newClassName;
 }
 
 - (NSString *)inferType:(NSString *)value
@@ -96,7 +115,7 @@
     {
         return @"BOOL";
     }
-    return @"NSString*"; // for now.
+    return @"NSString"; // for now.
 }
 
 - (XIBClass *)classForName: (NSString *)name
@@ -170,8 +189,12 @@
         xibClass = (XIBClass *)[classesToNames objectForKey:className];
         XIBProperty *property = [[XIBProperty alloc] init];
         property.name = elementName;
-        property.type = @"NSMutableArray*";
+        property.type = @"NSMutableArray";
         [xibClass addAttribute: property];
+        if([elementName isEqualToString:@"objects"])
+        {
+            inObjects = YES;
+        }
     }
 }
 
@@ -180,6 +203,11 @@
     namespaceURI:(NSString *)namespaceURI
    qualifiedName:(NSString *)qName
 {
+    if([elementName isEqualToString:@"objects"])
+    {
+        inObjects = NO;
+    }
+    
     // Pop off the stack...
     XIBClass *obj = (XIBClass *)[stack lastObject];
     NSString *className = [self classNameForElementName:elementName];

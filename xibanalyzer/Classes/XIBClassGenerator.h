@@ -17,6 +17,7 @@
     NSMutableArray *classStack;
     NSMutableDictionary *classesToNames;  // hold classes and file contents....
     NSMutableDictionary *classNameMap;    // hold mappings from XIB names to actual classnames
+    BOOL inObjects;
 }
 
 + (instancetype) xibClassGeneratorWithContentsOfFile: (NSString *)fileName;
