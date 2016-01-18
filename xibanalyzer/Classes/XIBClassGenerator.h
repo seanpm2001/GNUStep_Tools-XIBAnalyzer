@@ -8,12 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
+@class XIBClass;
+
 @interface XIBClassGenerator : NSObject <NSXMLParserDelegate>
 {
     NSXMLParser *parser;
     NSMutableArray *stack;
-    NSMutableDictionary *classes;  // hold classes and file contents....
-    NSMutableDictionary *classNameMap;  // hold mappings from XIB names to actual classnames
+    NSMutableArray *classStack;
+    NSMutableDictionary *classesToNames;  // hold classes and file contents....
+    NSMutableDictionary *classNameMap;    // hold mappings from XIB names to actual classnames
 }
 
 + (instancetype) xibClassGeneratorWithContentsOfFile: (NSString *)fileName;

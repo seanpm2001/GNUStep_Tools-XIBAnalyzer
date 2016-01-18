@@ -16,7 +16,7 @@
     if(self != nil)
     {
         self.parameterList = [NSMutableArray arrayWithCapacity:10];
-        self.name = @"";
+        self.name = @"bar";
     }
     return self;
 }

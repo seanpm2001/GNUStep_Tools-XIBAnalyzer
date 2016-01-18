@@ -1,4 +1,4 @@
-//
+ //
 //  XIBClassGenerator.m
 //  xibanalyzer
 //
@@ -8,6 +8,8 @@
 
 #import "XIBClassGenerator.h"
 #import "XIBClass.h"
+#import "XIBMethod.h"
+#import "XIBProperty.h"
 
 @implementation XIBClassGenerator 
 
@@ -60,7 +62,7 @@
         {
             [parser setDelegate:self];
             stack = [NSMutableArray arrayWithCapacity:100];
-            classes = [NSMutableDictionary dictionaryWithCapacity:100];
+            classesToNames = [NSMutableDictionary dictionaryWithCapacity:100];
             classNameMap = [NSMutableDictionary dictionaryWithCapacity:100];
         }
         else
@@ -82,28 +84,67 @@
     return elementName;
 }
 
+- (NSString *)inferType:(NSString *)value
+{
+    return @"NSString"; // for now.
+}
+
+- (XIBClass *)classForName: (NSString *)name
+{
+    XIBClass *xibClass = [classesToNames objectForKey:name];
+    if(xibClass == nil)
+    {
+        xibClass = [[XIBClass alloc] init];
+        xibClass.name = name;
+        [classesToNames setObject:xibClass forKey:name];
+    }
+    return xibClass;
+}
+
 // Delegate
+- (void)parserDidStartDocument:(NSXMLParser *)parser
+{
+    // Currently do nothing....
+    NSLog(@"Started parsing");
+
+}
+
 - (void)  parser:(NSXMLParser *)parser
  didStartElement:(NSString *)elementName
     namespaceURI:(NSString *)namespaceURI
    qualifiedName:(NSString *)qName
       attributes:(NSDictionary<NSString *,NSString *> *)attributeDict
 {
+    NSString *className = nil;
+    XIBClass *xibClass = nil;
     NSArray *allKeys = [attributeDict allKeys];
     if([allKeys count] > 0)
     {
-        // Push onto the stack...
-        [stack addObject:elementName];
-
         // Do whatever...
-        NSString *className = [self classNameForElementName:elementName];
-        XIBClass *xibClass = [[XIBClass alloc] init];
-        xibClass.className = className;
+        className = [self classNameForElementName:elementName];
+        xibClass = [self classForName:className];
         
+        // Push onto the stack...
+        [stack addObject:xibClass];
+
         for(NSString *key in allKeys)
         {
-            
+            NSString *value = [attributeDict objectForKey:key];
+            NSString *type = [self inferType: value];
+            XIBProperty *property = [[XIBProperty alloc] init];
+            property.name = key;
+            property.type = type;
+            [xibClass addAttribute: property];
         }
+    }
+    else
+    {
+        className = [stack lastObject];
+        xibClass = (XIBClass *)[classesToNames objectForKey:className];
+        XIBProperty *property = [[XIBProperty alloc] init];
+        property.name = elementName;
+        property.type = @"NSMutableArray";
+        [xibClass addAttribute: property];
     }
 }
 
@@ -112,9 +153,22 @@
     namespaceURI:(NSString *)namespaceURI
    qualifiedName:(NSString *)qName
 {
-    // Do whatever...
-    
     // Pop off the stack...
-    [stack removeLastObject];
+    XIBClass *obj = (XIBClass *)[stack lastObject];
+    NSString *className = [self classNameForElementName:elementName];
+    if([[obj name] isEqualToString:className] == YES)
+    {
+        [stack removeLastObject];
+    }
+}
+
+- (void)parserDidEndDocument:(NSXMLParser *)parser
+{
+    NSLog(@"Done parsing");
+    NSLog(@"Generating code...");
+    for(XIBClass *xibClass in classesToNames)
+    {
+        
+    }
 }
 @end

@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XIBElement.h"
 
-@interface XIBProperty : NSObject
+@interface XIBProperty : XIBElement
 
-@property (nonatomic,assign) NSString *name;
-@property (nonatomic,assign) NSString *type;
+@property (nonatomic, retain) NSString *type;
 
 @end

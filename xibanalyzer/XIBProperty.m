@@ -15,7 +15,7 @@
     self = [super init];
     if(self != nil)
     {
-        self.type = @"NSString *";
+        self.type = @"NSString";
         self.name = @"foo";
     }
     return self;

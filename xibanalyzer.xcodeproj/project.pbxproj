@@ -13,6 +13,7 @@
 		147848791C4AD5DC00EDBBF4 /* XIBClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 147848781C4AD5DC00EDBBF4 /* XIBClass.m */; };
 		1478487C1C4B3B5700EDBBF4 /* XIBProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 1478487B1C4B3B5700EDBBF4 /* XIBProperty.m */; };
 		1478487F1C4B3BBC00EDBBF4 /* XIBMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 1478487E1C4B3BBC00EDBBF4 /* XIBMethod.m */; };
+		147848821C4B59CA00EDBBF4 /* XIBElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 147848811C4B59CA00EDBBF4 /* XIBElement.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		1478487B1C4B3B5700EDBBF4 /* XIBProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XIBProperty.m; sourceTree = "<group>"; };
 		1478487D1C4B3BBC00EDBBF4 /* XIBMethod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XIBMethod.h; sourceTree = "<group>"; };
 		1478487E1C4B3BBC00EDBBF4 /* XIBMethod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XIBMethod.m; sourceTree = "<group>"; };
+		147848801C4B59CA00EDBBF4 /* XIBElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XIBElement.h; sourceTree = "<group>"; };
+		147848811C4B59CA00EDBBF4 /* XIBElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XIBElement.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 		1458FE6A1C48199400C53A2E /* xibanalyzer */ = {
 			isa = PBXGroup;
 			children = (
+				147848831C4B64F900EDBBF4 /* Extensions */,
 				1458FE721C48199F00C53A2E /* Classes */,
 				1458FE6B1C48199400C53A2E /* main.m */,
 			);
@@ -83,16 +87,25 @@
 			children = (
 				1458FE731C481FCA00C53A2E /* XIBClassGenerator.h */,
 				1458FE741C481FCA00C53A2E /* XIBClassGenerator.m */,
-				147848741C4A186200EDBBF4 /* NSString+Extensions.h */,
-				147848751C4A186200EDBBF4 /* NSString+Extensions.m */,
 				147848771C4AD5DC00EDBBF4 /* XIBClass.h */,
 				147848781C4AD5DC00EDBBF4 /* XIBClass.m */,
 				1478487A1C4B3B5700EDBBF4 /* XIBProperty.h */,
 				1478487B1C4B3B5700EDBBF4 /* XIBProperty.m */,
 				1478487D1C4B3BBC00EDBBF4 /* XIBMethod.h */,
 				1478487E1C4B3BBC00EDBBF4 /* XIBMethod.m */,
+				147848801C4B59CA00EDBBF4 /* XIBElement.h */,
+				147848811C4B59CA00EDBBF4 /* XIBElement.m */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		147848831C4B64F900EDBBF4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				147848741C4A186200EDBBF4 /* NSString+Extensions.h */,
+				147848751C4A186200EDBBF4 /* NSString+Extensions.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +167,7 @@
 				1478487F1C4B3BBC00EDBBF4 /* XIBMethod.m in Sources */,
 				147848761C4A186200EDBBF4 /* NSString+Extensions.m in Sources */,
 				1458FE751C481FCA00C53A2E /* XIBClassGenerator.m in Sources */,
+				147848821C4B59CA00EDBBF4 /* XIBElement.m in Sources */,
 				147848791C4AD5DC00EDBBF4 /* XIBClass.m in Sources */,
 				1478487C1C4B3B5700EDBBF4 /* XIBProperty.m in Sources */,
 				1458FE6C1C48199400C53A2E /* main.m in Sources */,

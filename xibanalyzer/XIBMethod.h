@@ -7,10 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XIBElement.h"
 
-@interface XIBMethod : NSObject
+@interface XIBMethod : XIBElement
 
-@property (nonatomic, assign) NSString *name;
-@property (nonatomic, assign) NSMutableArray *parameterList;
+@property (nonatomic, retain) NSMutableArray *parameterList;
 
 @end

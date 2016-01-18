@@ -7,13 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "XIBElement.h"
 
-@interface XIBClass : NSObject
+@class XIBMethod;
+@class XIBProperty;
 
-@property (nonatomic, assign) NSString *className;
-@property (nonatomic, assign) NSMutableArray *attributes;
-@property (nonatomic, assign) NSMutableArray *methods;
+@interface XIBClass : XIBElement
 
-- (NSString *) generate;
+@property (nonatomic, retain) NSMutableDictionary *attributes;
+@property (nonatomic, retain) NSMutableDictionary *methods;
+
+- (void) addAttribute: (XIBProperty *)property;
 
 @end
