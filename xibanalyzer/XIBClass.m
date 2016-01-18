@@ -43,7 +43,10 @@
 
 - (NSString *)generate
 {
-    NSString *classString = [NSString stringWithFormat:@"@interface %@ \n{\n", self.name];
+    NSString *classString = @"#import <Foundation/Foundation.h>\n#import <AppKit/AppKit.h>\n\n";
+    
+    
+    classString = [classString stringByAppendingFormat:@"@interface %@ \n{\n", self.name];
     
     for(XIBProperty *prop in [self.attributes allValues])
     {
