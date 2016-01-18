@@ -126,21 +126,37 @@
     NSArray *allKeys = [attributeDict allKeys];
     if([allKeys count] > 0)
     {
-        // Do whatever...
-        className = [self classNameForElementName:elementName];
-        xibClass = [self classForName:className];
-        
-        // Push onto the stack...
-        [stack addObject:xibClass];
-
-        for(NSString *key in allKeys)
+        if([allKeys containsObject:@"key"])
         {
-            NSString *value = [attributeDict objectForKey:key];
-            NSString *type = [self inferType: value];
+            XIBClass *currentClass = (XIBClass *)[stack lastObject];
+            className = [self classNameForElementName:elementName];
+            xibClass = [self classForName:className];
+            NSString *keyName = [attributeDict objectForKey:@"key"];
             XIBProperty *property = [[XIBProperty alloc] init];
-            property.name = key;
-            property.type = type;
-            [xibClass addAttribute: property];
+            property.name = keyName;
+            property.type = className;
+            [currentClass addAttribute:property];
+            
+            // Push onto the stack...
+            [stack addObject:xibClass];
+        }
+        else
+        {
+            className = [self classNameForElementName:elementName];
+            xibClass = [self classForName:className];
+            
+            // Push onto the stack...
+            [stack addObject:xibClass];
+            
+            for(NSString *key in allKeys)
+            {
+                NSString *value = [attributeDict objectForKey:key];
+                NSString *type = [self inferType: value];
+                XIBProperty *property = [[XIBProperty alloc] init];
+                property.name = key;
+                property.type = type;
+                [xibClass addAttribute: property];
+            }
         }
     }
     else
@@ -173,4 +189,5 @@
 {
     NSLog(@"Done parsing");
 }
+
 @end
