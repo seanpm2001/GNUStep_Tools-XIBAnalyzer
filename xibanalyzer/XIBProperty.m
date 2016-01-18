@@ -15,7 +15,7 @@
     self = [super init];
     if(self != nil)
     {
-        self.type = @"NSString";
+        self.type = @"NSString*";
         self.name = @"foo";
     }
     return self;
@@ -23,6 +23,6 @@
 
 - (NSString *)generate
 {
-    return [NSString stringWithFormat:@"%@ *%@", self.type, self.name];
+    return [NSString stringWithFormat:@"%@ %@", self.type, self.name];
 }
 @end

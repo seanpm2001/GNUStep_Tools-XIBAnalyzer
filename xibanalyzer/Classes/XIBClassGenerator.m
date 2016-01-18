@@ -92,7 +92,11 @@
 
 - (NSString *)inferType:(NSString *)value
 {
-    return @"NSString"; // for now.
+    if([value isEqualToString:@"NO"] || [value isEqualToString: @"YES"])
+    {
+        return @"BOOL";
+    }
+    return @"NSString*"; // for now.
 }
 
 - (XIBClass *)classForName: (NSString *)name
@@ -166,7 +170,7 @@
         xibClass = (XIBClass *)[classesToNames objectForKey:className];
         XIBProperty *property = [[XIBProperty alloc] init];
         property.name = elementName;
-        property.type = @"NSMutableArray";
+        property.type = @"NSMutableArray*";
         [xibClass addAttribute: property];
     }
 }
