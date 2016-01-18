@@ -145,7 +145,8 @@
     }
     else
     {
-        className = [stack lastObject];
+        XIBElement *elem = (XIBElement *)[stack lastObject];
+        className = elem.name;
         xibClass = (XIBClass *)[classesToNames objectForKey:className];
         XIBProperty *property = [[XIBProperty alloc] init];
         property.name = elementName;
