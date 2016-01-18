@@ -21,4 +21,8 @@
     return self;
 }
 
+- (NSString *)generate
+{
+    return [NSString stringWithFormat:@"%@ *%@", self.type, self.name];
+}
 @end

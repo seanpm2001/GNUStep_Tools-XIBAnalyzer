@@ -73,9 +73,15 @@
     return self;
 }
 
-- (BOOL) parse
+- (NSArray *) parse
 {
-    return [parser parse];
+    if([parser parse])
+    {
+        NSArray *sortedArray = [[classesToNames allValues] sortedArrayUsingSelector:@selector(compare:)];
+        return sortedArray;
+    }
+
+    return nil;
 }
 
 // Class name generation
@@ -165,10 +171,5 @@
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
     NSLog(@"Done parsing");
-    NSLog(@"Generating code...");
-    for(XIBClass *xibClass in classesToNames)
-    {
-        
-    }
 }
 @end

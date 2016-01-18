@@ -25,6 +25,6 @@
 
 - (instancetype) initWithData: (NSData *)data;
 - (NSString *)classNameForElementName: (NSString *)elementName;
-- (BOOL) parse;
+- (NSArray *) parse;
 
 @end

@@ -21,4 +21,9 @@
     return self;
 }
 
+- (NSString *)generate
+{
+    return [NSString stringWithFormat:@"- (IBAction) %@: (id)sender;",self.name];
+}
+
 @end

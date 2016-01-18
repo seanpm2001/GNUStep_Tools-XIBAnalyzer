@@ -41,4 +41,32 @@
     }
 }
 
+- (NSString *)generate
+{
+    NSString *classString = [NSString stringWithFormat:@"@interface %@ \n{\n", self.name];
+    
+    for(XIBProperty *prop in [self.attributes allValues])
+    {
+        NSString *propString = [NSString stringWithFormat: @"\t%@\n",[prop generate]];
+        classString = [classString stringByAppendingString: propString];
+    }
+    
+    classString = [classString stringByAppendingString:@"}\n"];  // end ivar section
+    
+    for(XIBMethod *method in [self.methods allValues])
+    {
+        NSString *methodString = [NSString stringWithFormat: @"%@\n",[method generate]];
+        classString = [classString stringByAppendingString: methodString];
+    }
+
+    classString = [classString stringByAppendingString:@"\n@end\n"];  // end ivar section
+
+    return classString;
+}
+
+- (NSUInteger) compare: (id)obj
+{
+    XIBClass *aclass = (XIBClass *)obj;
+    return [[self name] compare:aclass.name];
+}
 @end
