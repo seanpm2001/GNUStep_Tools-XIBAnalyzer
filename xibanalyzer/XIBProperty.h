@@ -10,6 +10,9 @@
 #import "XIBElement.h"
 
 @interface XIBProperty : XIBElement
+{
+    NSString *type;
+}
 
 @property (nonatomic, retain) NSString *type;
 

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 
 @interface XIBElement : NSObject
+{
+    NSString *name;
+}
 
 @property (nonatomic, retain) NSString *name;
 

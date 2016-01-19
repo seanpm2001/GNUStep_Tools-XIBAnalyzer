@@ -13,6 +13,10 @@
 @class XIBProperty;
 
 @interface XIBClass : XIBElement
+{
+    NSMutableDictionary *attributes;
+    NSMutableDictionary *methods;
+}
 
 @property (nonatomic, retain) NSMutableDictionary *attributes;
 @property (nonatomic, retain) NSMutableDictionary *methods;
