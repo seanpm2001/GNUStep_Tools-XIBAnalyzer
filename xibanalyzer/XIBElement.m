@@ -10,6 +10,8 @@
 
 @implementation XIBElement
 
+@synthesize name;
+
 - (NSString *) generate
 {
     // will generate contents based on attributes....

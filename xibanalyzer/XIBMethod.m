@@ -10,6 +10,8 @@
 
 @implementation XIBMethod
 
+@synthesize parameterList;
+
 - (instancetype) init
 {
     self = [super init];

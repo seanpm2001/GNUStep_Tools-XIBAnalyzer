@@ -18,7 +18,7 @@ int main(int argc, const char * argv[]) {
             return -1;
         }*/
         
-        NSString *fileName = @"/Users/heron/Desktop/MainMenu.xib"; // [NSString stringWithUTF8String:argv[1]];
+        NSString *fileName = @"/Users/heron/Desktop/Main.storyboard"; // [NSString stringWithUTF8String:argv[1]];
         XIBClassGenerator *classGenerator = [XIBClassGenerator xibClassGeneratorWithContentsOfFile:fileName];
         NSArray *array = [classGenerator parse];
         if(array == nil)

@@ -12,6 +12,8 @@
 
 @implementation XIBClass
 
+@synthesize attributes, methods;
+
 - (instancetype) init
 {
     self = [super init];
@@ -43,9 +45,9 @@
 
 - (NSString *)generate
 {
-    NSString *classString = @"#import <Foundation/Foundation.h>\n#import <AppKit/AppKit.h>\n\n";
+    NSString *classString = nil;
     
-    
+    classString = @"#import <Foundation/Foundation.h>\n#import <AppKit/AppKit.h>\n\n";    
     classString = [classString stringByAppendingFormat:@"@interface %@ \n{\n", self.name];
     
     for(XIBProperty *prop in [self.attributes allValues])

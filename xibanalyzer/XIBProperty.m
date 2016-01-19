@@ -10,6 +10,8 @@
 
 @implementation XIBProperty
 
+@synthesize type;
+
 - (instancetype) init
 {
     self = [super init];
