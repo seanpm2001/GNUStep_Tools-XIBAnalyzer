@@ -10,6 +10,9 @@
 #import "XIBElement.h"
 
 @interface XIBMethod : XIBElement
+{
+    NSMutableArray *parameterList;
+}
 
 @property (nonatomic, retain) NSMutableArray *parameterList;
 
