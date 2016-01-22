@@ -11,9 +11,11 @@
 
 @interface XIBMethod : XIBElement
 {
+    NSString *returnType;
     NSMutableArray *parameterList;
 }
 
+@property (nonatomic, retain) NSString *returnType;
 @property (nonatomic, retain) NSMutableArray *parameterList;
 
 @end

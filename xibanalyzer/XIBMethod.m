@@ -11,6 +11,7 @@
 @implementation XIBMethod
 
 @synthesize parameterList;
+@synthesize returnType;
 
 - (instancetype) init
 {
@@ -19,13 +20,14 @@
     {
         self.parameterList = [NSMutableArray arrayWithCapacity:10];
         self.name = @"bar";
+        self.returnType = @"void";
     }
     return self;
 }
 
 - (NSString *)generate
 {
-    return [NSString stringWithFormat:@"- (IBAction) %@: (id)sender;",self.name];
+    return [NSString stringWithFormat:@"- (%@) %@: (id)sender;",self.returnType,self.name];
 }
 
 @end

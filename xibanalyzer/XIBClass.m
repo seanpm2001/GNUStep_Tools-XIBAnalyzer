@@ -47,8 +47,8 @@
 {
     NSString *classString = nil;
     
-    classString = @"#import <Foundation/Foundation.h>\n#import <AppKit/AppKit.h>\n\n";    
-    classString = [classString stringByAppendingFormat:@"@interface %@ \n{\n", self.name];
+    classString = @"#import <Foundation/Foundation.h>\n\n";
+    classString = [classString stringByAppendingFormat:@"@interface %@ : NSObject\n{\n", self.name];
     
     for(XIBProperty *prop in [self.attributes allValues])
     {

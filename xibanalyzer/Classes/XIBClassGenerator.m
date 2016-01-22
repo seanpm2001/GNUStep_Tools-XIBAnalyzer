@@ -95,16 +95,16 @@
         [elementName isEqualToString:@"deployment"] ||
         [elementName isEqualToString:@"plugIn"]))
     {
-        newClassName = [@"IB" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
+        newClassName = [@"XIBIB" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
     }
     else if([elementName isEqualToString:@"action"] ||
             [elementName isEqualToString:@"outlet"])
     {
-        newClassName = [@"IB" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
+        newClassName = [@"XIBIB" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
     }
     else
     {
-        newClassName = [@"NS" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
+        newClassName = [@"XIB" stringByAppendingString:[elementName stringByUpperCasingFirstCharacter]];
     }
     return newClassName;
 }
@@ -170,6 +170,20 @@
             
             // Push onto the stack...
             [stack addObject:xibClass];
+            
+            for(NSString *key in allKeys)
+            {
+                if([key isEqualToString: @"key"])
+                {
+                    continue;
+                }
+                NSString *value = [attributeDict objectForKey:key];
+                NSString *type = [self inferType: value];
+                XIBProperty *property = [[XIBProperty alloc] init];
+                property.name = key;
+                property.type = type;
+                [xibClass addAttribute: property];
+            }
         }
         else
         {
