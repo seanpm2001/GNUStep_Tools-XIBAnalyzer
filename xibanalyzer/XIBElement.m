@@ -18,4 +18,10 @@
     return self.name;
 }
 
+- (NSUInteger) compare: (id)obj
+{
+    XIBElement *elem = (XIBElement *)obj;
+    return [[self name] compare:elem.name];
+}
+
 @end

@@ -34,12 +34,12 @@
     }
 }
 
-- (void) addMethod: (XIBMethod *)property
+- (void) addMethod: (XIBMethod *)method
 {
-    XIBProperty *prop = [self.attributes objectForKey:property.name];
-    if(prop == nil)
+    XIBMethod *meth = [self.methods objectForKey:method.name];
+    if(meth == nil)
     {
-        [self.attributes setObject:prop forKey:prop.name];
+        [self.methods setObject:method forKey:method.name];
     }
 }
 
@@ -50,17 +50,17 @@
     classString = @"#import <Foundation/Foundation.h>\n\n";
     classString = [classString stringByAppendingFormat:@"@interface %@ : NSObject\n{\n", self.name];
     
-    for(XIBProperty *prop in [self.attributes allValues])
+    for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
     {
-        NSString *propString = [NSString stringWithFormat: @"\t%@\n",[prop generate]];
+        NSString *propString = [NSString stringWithFormat: @"\t%@;\n",[prop generate]];
         classString = [classString stringByAppendingString: propString];
     }
     
-    classString = [classString stringByAppendingString:@"}\n"];  // end ivar section
+    classString = [classString stringByAppendingString:@"}\n\n"];  // end ivar section
     
-    for(XIBMethod *method in [self.methods allValues])
+    for(XIBMethod *method in [[self.methods allValues] sortedArrayUsingSelector:@selector(compare:)])
     {
-        NSString *methodString = [NSString stringWithFormat: @"%@\n",[method generate]];
+        NSString *methodString = [NSString stringWithFormat: @"%@;\n",[method generate]];
         classString = [classString stringByAppendingString: methodString];
     }
 
@@ -69,9 +69,4 @@
     return classString;
 }
 
-- (NSUInteger) compare: (id)obj
-{
-    XIBClass *aclass = (XIBClass *)obj;
-    return [[self name] compare:aclass.name];
-}
 @end

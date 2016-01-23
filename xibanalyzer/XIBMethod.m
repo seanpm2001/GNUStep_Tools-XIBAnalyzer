@@ -7,6 +7,8 @@
 //
 
 #import "XIBMethod.h"
+#import "XIBProperty.h"
+#import "NSString+Extensions.h"
 
 @implementation XIBMethod
 
@@ -19,15 +21,53 @@
     if(self != nil)
     {
         self.parameterList = [NSMutableArray arrayWithCapacity:10];
-        self.name = @"bar";
+        self.name = @"";
         self.returnType = @"void";
     }
     return self;
 }
 
-- (NSString *)generate
+- (void) addParameter: (NSString *)aname ofType: (NSString *)type
 {
-    return [NSString stringWithFormat:@"- (%@) %@: (id)sender;",self.returnType,self.name];
+    XIBProperty *property = [[XIBProperty alloc] init];
+    property.name = aname;
+    property.type = type;
+    [self.parameterList addObject: property];
 }
 
+- (void) addParameter: (XIBProperty *)prop
+{
+    [self.parameterList addObject:prop];
+}
+
+- (NSString *)generate
+{
+    NSString *generatedString = nil;
+    
+    if([self.parameterList count] > 0)
+    {
+        NSString *parameterListString = @"";
+        NSUInteger index = 0;
+        
+        for(XIBProperty *parameter in self.parameterList)
+        {
+            NSString *methodParamString = [parameter.name stringByUpperCasingFirstCharacter];
+            if(index > 0)
+            {
+                methodParamString = [@"with" stringByAppendingString:methodParamString];
+            }
+            
+            parameterListString = [parameterListString stringByAppendingFormat:@"%@:(%@)%@",methodParamString,parameter.type,parameter.name];
+            index++;
+        }
+       
+        generatedString = [NSString stringWithFormat:@"- (%@) set%@",self.returnType, parameterListString];
+    }
+    else
+    {
+        generatedString = [NSString stringWithFormat:@"- (%@) %@",self.returnType, self.name];
+    }
+
+    return generatedString;
+}
 @end

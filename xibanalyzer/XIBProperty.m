@@ -34,4 +34,5 @@
     }
     return [NSString stringWithFormat:@"%@ %@", aType, self.name];
 }
+
 @end

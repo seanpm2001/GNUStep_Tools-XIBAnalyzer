@@ -183,6 +183,19 @@
                 property.name = key;
                 property.type = type;
                 [xibClass addAttribute: property];
+                
+                // Getter
+                XIBMethod *getter = [[XIBMethod alloc] init];
+                getter.returnType = type;
+                getter.name = key;
+                [xibClass addMethod: getter];
+                
+                
+                // Setter
+                XIBMethod *setter = [[XIBMethod alloc] init];
+                setter.name = [@"set_" stringByAppendingString: key];
+                [setter addParameter:property];
+                [xibClass addMethod: setter];
             }
         }
         else
@@ -201,6 +214,19 @@
                 property.name = key;
                 property.type = type;
                 [xibClass addAttribute: property];
+                
+                // Getter
+                XIBMethod *getter = [[XIBMethod alloc] init];
+                getter.returnType = type;
+                getter.name = key;
+                [xibClass addMethod: getter];
+                
+                
+                // Setter
+                XIBMethod *setter = [[XIBMethod alloc] init];
+                setter.name = [@"set_" stringByAppendingString: key];
+                [setter addParameter:property];
+                [xibClass addMethod: setter];
             }
         }
     }
@@ -217,6 +243,19 @@
         {
             inObjects = YES;
         }
+        
+        // Getter
+        XIBMethod *getter = [[XIBMethod alloc] init];
+        getter.returnType = property.type;
+        getter.name = property.name;
+        [xibClass addMethod: getter];
+        
+        
+        // Setter
+        XIBMethod *setter = [[XIBMethod alloc] init];
+        setter.name = [@"set_" stringByAppendingString: property.name];
+        [setter addParameter:property];
+        [xibClass addMethod: setter];
     }
 }
 

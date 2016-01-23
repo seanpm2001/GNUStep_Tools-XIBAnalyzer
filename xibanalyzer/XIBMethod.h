@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "XIBElement.h"
 
+@class XIBProperty;
+
 @interface XIBMethod : XIBElement
 {
     NSString *returnType;
@@ -17,5 +19,8 @@
 
 @property (nonatomic, retain) NSString *returnType;
 @property (nonatomic, retain) NSMutableArray *parameterList;
+
+- (void) addParameter: (NSString *)aname ofType: (NSString *)type;
+- (void) addParameter: (XIBProperty *)prop;
 
 @end

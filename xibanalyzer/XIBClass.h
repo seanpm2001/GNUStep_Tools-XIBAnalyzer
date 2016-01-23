@@ -22,5 +22,6 @@
 @property (nonatomic, retain) NSMutableDictionary *methods;
 
 - (void) addAttribute: (XIBProperty *)property;
+- (void) addMethod: (XIBMethod *)method;
 
 @end
