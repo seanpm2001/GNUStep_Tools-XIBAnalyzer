@@ -52,7 +52,7 @@
     
     for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
     {
-        NSString *propString = [NSString stringWithFormat: @"\t%@;\n",[prop generate]];
+        NSString *propString = [NSString stringWithFormat: @"\t_%@;\n",[prop generate]];
         classString = [classString stringByAppendingString: propString];
     }
     
