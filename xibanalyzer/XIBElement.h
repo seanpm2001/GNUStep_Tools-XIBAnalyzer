@@ -16,5 +16,6 @@
 @property (nonatomic, retain) NSString *name;
 
 - (NSString *) generate;
+- (NSString *) generateCode;
 
 @end

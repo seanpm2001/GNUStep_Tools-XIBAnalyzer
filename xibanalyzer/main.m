@@ -29,8 +29,11 @@ int main(int argc, const char * argv[]) {
         {
             for(XIBClass *xibClass in array)
             {
-                NSString *stringForClass = [xibClass generate];
-                NSLog(@"%@",stringForClass);
+                NSString *stringForClassHeader = [xibClass generate];
+                NSLog(@"%@",stringForClassHeader);
+                
+                NSString *stringForClassCode = [xibClass generateCode];
+                NSLog(@"%@",stringForClassCode);
             }
         }
     }

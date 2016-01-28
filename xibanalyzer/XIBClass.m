@@ -69,4 +69,32 @@
     return classString;
 }
 
+- (NSString *)generateCode
+{
+    NSString *classString = nil;
+    
+    classString = [NSString stringWithFormat:@"#import \"%@.h\"\n\n",self.name];
+    classString = [classString stringByAppendingFormat:@"@implementation %@ \n\n", self.name];
+    
+    /*
+    for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
+    {
+        NSString *propString = [NSString stringWithFormat: @"\t_%@\n",[prop generate]];
+        classString = [classString stringByAppendingString: propString];
+    }
+     */
+    
+    // classString = [classString stringByAppendingString:@"}\n\n"];  // end ivar section
+    
+    for(XIBMethod *method in [[self.methods allValues] sortedArrayUsingSelector:@selector(compare:)])
+    {
+        NSString *methodString = [NSString stringWithFormat: @"%@\n",[method generateCode]];
+        classString = [classString stringByAppendingString: methodString];
+    }
+    
+    classString = [classString stringByAppendingString:@"@end\n"];  // end ivar section
+    
+    return classString;
+}
+
 @end

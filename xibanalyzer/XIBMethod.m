@@ -70,4 +70,49 @@
 
     return generatedString;
 }
+
+- (NSString *)generateCode
+{
+    NSString *generatedString = nil;
+    
+    if([self.parameterList count] > 0)
+    {
+        NSString *parameterListString = @"";
+        NSUInteger index = 0;
+        
+        for(XIBProperty *parameter in self.parameterList)
+        {
+            NSString *methodParamString = [parameter.name stringByUpperCasingFirstCharacter];
+            if(index > 0)
+            {
+                methodParamString = [@"with" stringByAppendingString:methodParamString];
+            }
+            
+            parameterListString = [parameterListString stringByAppendingFormat:@"%@:(%@)%@",methodParamString,parameter.type,parameter.name];
+            index++;
+        }
+        
+        generatedString = [NSString stringWithFormat:@"- (%@) set%@",self.returnType, parameterListString];
+        if(self.parameterList.count == 1)
+        {
+            XIBProperty *prop = (XIBProperty *)[parameterList objectAtIndex:0];
+            NSString *aname = [prop name];
+            if([prop.type isEqualToString:@"BOOL"] == NO)
+            {
+                generatedString = [generatedString stringByAppendingFormat:@"\n{\n\tASSIGN(_%@, %@);\n}\n", aname, aname];
+            }
+            else
+            {
+                generatedString = [generatedString stringByAppendingFormat:@"\n{\n\t_%@ = %@;\n}\n", aname, aname];
+            }
+        }
+    }
+    else
+    {
+        generatedString = [NSString stringWithFormat:@"- (%@) %@",self.returnType, self.name];
+        generatedString = [generatedString stringByAppendingFormat:@"\n{\n\treturn _%@;\n}\n", self.name];
+    }
+    
+    return generatedString;
+}
 @end

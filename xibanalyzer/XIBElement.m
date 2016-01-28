@@ -18,6 +18,12 @@
     return self.name;
 }
 
+- (NSString *) generateCode
+{
+    // will generate contents based on attributes....
+    return self.name;
+}
+
 - (NSUInteger) compare: (id)obj
 {
     XIBElement *elem = (XIBElement *)obj;
