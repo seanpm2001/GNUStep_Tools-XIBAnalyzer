@@ -32,7 +32,7 @@
     {
         aType = [aType stringByAppendingString:@"*"];
     }
-    return [NSString stringWithFormat:@"%@ %@", aType, self.name];
+    return [NSString stringWithFormat:@"%@ _%@", aType, self.name];
 }
 
 @end
