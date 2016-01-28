@@ -10,9 +10,14 @@
 #import "XIBClassGenerator.h"
 #import "XIBClass.h"
 
+// #define DEBUG 1
+
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
+#ifdef DEBUG
+        NSString *fileName = @"/Users/heron/Desktop/MainMenu.xib";
+#else
         if(argc <= 1)
         {
             puts("\nUsage: xibanalyzer xibname.xib\n");
@@ -20,11 +25,12 @@ int main(int argc, const char * argv[]) {
         }
         
         NSString *fileName = [NSString stringWithUTF8String:argv[1]];
+#endif
         XIBClassGenerator *classGenerator = [XIBClassGenerator xibClassGeneratorWithContentsOfFile:fileName];
         NSArray *array = [classGenerator parse];
         if(array == nil)
         {
-            puts("\nInput file was not parseable\n");
+            printf("\nInput file '%s' was not parseable\n",[fileName cStringUsingEncoding:NSUTF8StringEncoding]);
             return -1;
         }
         else
@@ -32,12 +38,16 @@ int main(int argc, const char * argv[]) {
             for(XIBClass *xibClass in array)
             {
                 NSString *stringForClassHeader = [xibClass generate];
+#ifdef DEBUG
                 NSLog(@"%@",stringForClassHeader);
+#endif
                 NSString *headerName = [xibClass.name stringByAppendingString:@".h"];
                 [stringForClassHeader writeToFile:headerName atomically:YES encoding:NSUTF8StringEncoding error:NULL];
                 
                 NSString *stringForClassCode = [xibClass generateCode];
+#ifdef DEBUG
                 NSLog(@"%@",stringForClassCode);
+#endif
                 NSString *codeName = [xibClass.name stringByAppendingString:@".m"];
                 [stringForClassCode writeToFile:codeName atomically:YES encoding:NSUTF8StringEncoding error:NULL];
             }
