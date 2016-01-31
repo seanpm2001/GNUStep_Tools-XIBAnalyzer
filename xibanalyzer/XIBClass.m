@@ -52,7 +52,7 @@
     
     for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
     {
-        NSString *propString = [NSString stringWithFormat: @"\t%@;\n",[prop generate]];
+        NSString *propString = [NSString stringWithFormat: @"  %@;\n",[prop generate]];
         classString = [classString stringByAppendingString: propString];
     }
     
@@ -75,14 +75,6 @@
     
     classString = [NSString stringWithFormat:@"#import \"%@.h\"\n\n",self.name];
     classString = [classString stringByAppendingFormat:@"@implementation %@ \n\n", self.name];
-    
-    /*
-    for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
-    {
-        NSString *propString = [NSString stringWithFormat: @"\t_%@\n",[prop generate]];
-        classString = [classString stringByAppendingString: propString];
-    }
-     */
     
     // classString = [classString stringByAppendingString:@"}\n\n"];  // end ivar section
     

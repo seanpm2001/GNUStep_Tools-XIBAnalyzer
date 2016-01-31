@@ -99,18 +99,18 @@
             NSString *aname = [prop name];
             if([prop.type isEqualToString:@"BOOL"] == NO)
             {
-                generatedString = [generatedString stringByAppendingFormat:@"\n{\n\tASSIGN(_%@, %@);\n}\n", aname, aname];
+                generatedString = [generatedString stringByAppendingFormat:@"\n{\n  ASSIGN(_%@, %@);\n}\n", aname, aname];
             }
             else
             {
-                generatedString = [generatedString stringByAppendingFormat:@"\n{\n\t_%@ = %@;\n}\n", aname, aname];
+                generatedString = [generatedString stringByAppendingFormat:@"\n{\n  _%@ = %@;\n}\n", aname, aname];
             }
         }
     }
     else
     {
         generatedString = [NSString stringWithFormat:@"- (%@) %@",self.returnType, self.name];
-        generatedString = [generatedString stringByAppendingFormat:@"\n{\n\treturn _%@;\n}\n", self.name];
+        generatedString = [generatedString stringByAppendingFormat:@"\n{\n  return _%@;\n}\n", self.name];
     }
     
     return generatedString;
