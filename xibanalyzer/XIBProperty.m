@@ -26,9 +26,7 @@
 - (NSString *)generate
 {
     NSString *aType = self.type;
-    if([aType containsString:@"Rect"] == NO &&
-       [aType isEqualToString:@"BOOL"] == NO &&
-       [aType containsString:@"Mask"] == NO)
+    if([aType isEqualToString:@"BOOL"] == NO)
     {
         aType = [aType stringByAppendingString:@"*"];
     }

@@ -51,13 +51,26 @@
         
         for(XIBProperty *parameter in self.parameterList)
         {
+            BOOL isObject = NO;
             NSString *methodParamString = [parameter.name stringByUpperCasingFirstCharacter];
             if(index > 0)
             {
                 methodParamString = [@"with" stringByAppendingString:methodParamString];
             }
             
-            parameterListString = [parameterListString stringByAppendingFormat:@"%@:(%@)%@",methodParamString,parameter.type,parameter.name];
+            if([parameter.type isEqualToString:@"BOOL"] == NO)
+            {
+                isObject = YES;
+            }
+            
+            if(isObject == YES)
+            {
+                parameterListString = [parameterListString stringByAppendingFormat:@"%@: (%@ *) %@",methodParamString,parameter.type,parameter.name];
+            }
+            else
+            {
+                parameterListString = [parameterListString stringByAppendingFormat:@"%@: (%@) %@",methodParamString,parameter.type,parameter.name];
+            }
             index++;
         }
        
@@ -65,7 +78,20 @@
     }
     else
     {
-        generatedString = [NSString stringWithFormat:@"- (%@) %@",self.returnType, self.name];
+        BOOL isObject = NO;
+        if([self.returnType isEqualToString:@"BOOL"] == NO)
+        {
+            isObject = YES;
+        }
+        
+        if(isObject == YES)
+        {
+            generatedString = [NSString stringWithFormat:@"- (%@ *) %@",self.returnType, self.name];
+        }
+        else
+        {
+            generatedString = [NSString stringWithFormat:@"- (%@) %@",self.returnType, self.name];
+        }
     }
 
     return generatedString;
@@ -82,13 +108,26 @@
         
         for(XIBProperty *parameter in self.parameterList)
         {
+            BOOL isObject = NO;
             NSString *methodParamString = [parameter.name stringByUpperCasingFirstCharacter];
             if(index > 0)
             {
                 methodParamString = [@"with" stringByAppendingString:methodParamString];
             }
             
-            parameterListString = [parameterListString stringByAppendingFormat:@"%@:(%@)%@",methodParamString,parameter.type,parameter.name];
+            if([parameter.type isEqualToString:@"BOOL"] == NO)
+            {
+                isObject = YES;
+            }
+            
+            if(isObject == YES)
+            {
+                parameterListString = [parameterListString stringByAppendingFormat:@"%@: (%@ *) %@",methodParamString,parameter.type,parameter.name];
+            }
+            else
+            {
+                parameterListString = [parameterListString stringByAppendingFormat:@"%@: (%@) %@",methodParamString,parameter.type,parameter.name];
+            }
             index++;
         }
         
@@ -109,8 +148,22 @@
     }
     else
     {
-        generatedString = [NSString stringWithFormat:@"- (%@) %@",self.returnType, self.name];
-        generatedString = [generatedString stringByAppendingFormat:@"\n{\n  return _%@;\n}\n", self.name];
+        BOOL isObject = NO;
+        if([self.returnType isEqualToString:@"BOOL"] == NO)
+        {
+            isObject = YES;
+        }
+        
+        if(isObject == YES)
+        {
+            generatedString = [NSString stringWithFormat:@"- (%@ *) %@",self.returnType, self.name];
+            generatedString = [generatedString stringByAppendingFormat:@"\n{\n  return _%@;\n}\n", self.name];
+        }
+        else
+        {
+            generatedString = [NSString stringWithFormat:@"- (%@) %@",self.returnType, self.name];
+            generatedString = [generatedString stringByAppendingFormat:@"\n{\n  return _%@;\n}\n", self.name];
+        }
     }
     
     return generatedString;
