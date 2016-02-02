@@ -47,8 +47,19 @@
 {
     NSString *classString = nil;
     
-    classString = @"#import <Foundation/Foundation.h>\n\n";
-    classString = [classString stringByAppendingFormat:@"@interface %@ : NSObject\n{\n", self.name];
+    classString = [NSString stringWithFormat:@"/* Class Header:%@ */\n#ifndef __%@_H_\n#define __%@_H_\n\n", [self name],[self name],[self name]];
+    classString = [classString stringByAppendingString:@"#import <Foundation/Foundation.h>\n\n"];
+    
+    for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
+    {
+        if([prop.type containsString:@"XIB"])
+        {
+            NSString *headerString = [NSString stringWithFormat: @"@class %@;\n",prop.type];
+            classString = [classString stringByAppendingString: headerString];
+        }
+    }
+    
+    classString = [classString stringByAppendingFormat:@"\n@interface %@ : NSObject\n{\n", self.name];
     
     for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
     {
@@ -65,6 +76,7 @@
     }
 
     classString = [classString stringByAppendingString:@"\n@end\n"];  // end ivar section
+    classString = [classString stringByAppendingString:@"\n#endif\n"];
 
     return classString;
 }
@@ -73,10 +85,22 @@
 {
     NSString *classString = nil;
     
-    classString = [NSString stringWithFormat:@"#import \"%@.h\"\n\n",self.name];
-    classString = [classString stringByAppendingFormat:@"@implementation %@ \n\n", self.name];
+    classString = [NSString stringWithFormat:@"/* Class Code:%@ */\n\n", [self name]];
+    classString = [classString stringByAppendingFormat:@"#import \"%@.h\"\n\n",self.name];
+    classString = [classString stringByAppendingString:@"#ifndef GNUSTEP\n"];
+    classString = [classString stringByAppendingString:@"#import \"XIBCommon.h\"\n"];
+    classString = [classString stringByAppendingString:@"#endif\n\n"];
+
+    for(XIBProperty *prop in [[self.attributes allValues] sortedArrayUsingSelector:@selector(compare:)])
+    {
+        if([prop.type containsString:@"XIB"])
+        {
+            NSString *headerString = [NSString stringWithFormat: @"#import \"%@.h\"\n",prop.type];
+            classString = [classString stringByAppendingString: headerString];
+        }
+    }
     
-    // classString = [classString stringByAppendingString:@"}\n\n"];  // end ivar section
+    classString = [classString stringByAppendingFormat:@"\n@implementation %@ \n\n", self.name];
     
     for(XIBMethod *method in [[self.methods allValues] sortedArrayUsingSelector:@selector(compare:)])
     {
