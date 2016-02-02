@@ -126,6 +126,7 @@
         xibClass = [[XIBClass alloc] init];
         xibClass.name = name;
         [classesToNames setObject:xibClass forKey:name];
+        printf("Parsing class: %s\n",[name cStringUsingEncoding:NSUTF8StringEncoding]);
     }
     return xibClass;
 }
@@ -134,7 +135,7 @@
 - (void)parserDidStartDocument:(NSXMLParser *)parser
 {
     // Currently do nothing....
-    NSLog(@"Started parsing");
+    puts("Started parsing");
 
 }
 
@@ -280,7 +281,7 @@
 
 - (void)parserDidEndDocument:(NSXMLParser *)parser
 {
-    NSLog(@"Done parsing");
+    puts("Done parsing");
 }
 
 @end
