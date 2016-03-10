@@ -11,5 +11,6 @@
 @interface NSString (Extensions)
 
 - (NSString *) stringByUpperCasingFirstCharacter;
+- (NSString *) renameIfReservedWord;
 
 @end

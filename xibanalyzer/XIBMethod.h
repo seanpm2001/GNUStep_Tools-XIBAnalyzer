@@ -22,5 +22,6 @@
 
 - (void) addParameter: (NSString *)aname ofType: (NSString *)type;
 - (void) addParameter: (XIBProperty *)prop;
+- (NSString *)generateCopy;
 
 @end

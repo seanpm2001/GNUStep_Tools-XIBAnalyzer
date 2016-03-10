@@ -108,6 +108,17 @@
         classString = [classString stringByAppendingString: methodString];
     }
     
+    classString = [classString stringByAppendingString:@"- (instancetype) copyWithZone: (NSZone *)zone \n{\n"];
+    classString = [classString stringByAppendingFormat:@"   %@* acopy = [[%@ allocWithZone: zone] init];", self.name, self.name];
+
+    for(XIBMethod *method in [[self.methods allValues] sortedArrayUsingSelector:@selector(compare:)])
+    {
+        NSString *methodString = [NSString stringWithFormat: @"%@\n",[method generateCopy]];
+        classString = [classString stringByAppendingString: methodString];
+    }
+    classString = [classString stringByAppendingString:@"   return acopy;\n"];
+    classString = [classString stringByAppendingString:@"}\n"];
+    
     classString = [classString stringByAppendingString:@"@end\n"];  // end ivar section
     
     return classString;

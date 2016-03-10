@@ -14,7 +14,6 @@
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        
 #ifdef DEBUG
         NSString *fileName = @"/Users/heron/Desktop/MainMenu.xib";
 #else

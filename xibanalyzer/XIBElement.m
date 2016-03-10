@@ -7,10 +7,21 @@
 //
 
 #import "XIBElement.h"
+#import "NSString+Extensions.h"
 
 @implementation XIBElement
 
-@synthesize name;
+@dynamic name;
+
+- (void) setName:(NSString *)aname
+{
+    name = [aname renameIfReservedWord];
+}
+
+- (NSString *)name
+{
+    return name;
+}
 
 - (NSString *) generate
 {

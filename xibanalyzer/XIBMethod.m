@@ -168,4 +168,19 @@
     
     return generatedString;
 }
+
+- (NSString *)generateCopy
+{
+    NSString *generatedString = @"";
+    
+    if([self.parameterList count] == 1)
+    {
+        XIBProperty *parameter = self.parameterList[0];
+        NSString *methodParamString = [parameter.name stringByUpperCasingFirstCharacter];
+        
+        generatedString = [NSString stringWithFormat:@"   [acopy set%@: [self %@]];", methodParamString, parameter.name];
+    }
+    
+    return generatedString;
+}
 @end

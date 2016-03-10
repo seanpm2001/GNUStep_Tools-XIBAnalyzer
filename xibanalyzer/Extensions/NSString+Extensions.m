@@ -18,4 +18,19 @@
     return newString;
 }
 
+- (NSString *) renameIfReservedWord
+{
+    if([self isEqualToString:@"id"])
+    {
+        return @"ID";
+    }
+    
+    if([self isEqualToString:@"class"])
+    {
+        return @"clazz";
+    }
+    
+    return self;
+}
+
 @end
