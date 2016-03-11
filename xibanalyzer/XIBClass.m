@@ -93,12 +93,12 @@
     {
         if([prop.type containsString:@"BOOL"])
         {
-            NSString *varString = [NSString stringWithFormat: @"      %@ = NO;\n",prop.name];
+            NSString *varString = [NSString stringWithFormat: @"      _%@ = NO;\n",prop.name];
             generatedString = [generatedString stringByAppendingString: varString];
         }
         else
         {
-            NSString *varString = [NSString stringWithFormat: @"      %@ = nil;\n",prop.name];
+            NSString *varString = [NSString stringWithFormat: @"      _%@ = nil;\n",prop.name];
             generatedString = [generatedString stringByAppendingString: varString];
         }
     }
